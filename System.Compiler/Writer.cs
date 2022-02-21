@@ -1394,6 +1394,8 @@ namespace System.Compiler{
       if (type.Template != null){
         blobIndex = this.GetBlobIndex(type);
         structuralKey = ((type.Template.UniqueKey << 8)&int.MaxValue) + blobIndex;
+        if (structuralKey < 0)
+          structuralKey = -structuralKey; // KeyNeedsToBeGreaterThanZero fix
       }
       Object index = this.typeSpecIndex[type.UniqueKey];
       if (index == null){
